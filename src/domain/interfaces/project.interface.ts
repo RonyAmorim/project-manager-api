@@ -5,6 +5,6 @@ export interface IProject {
   id: number;
   name: string;
   description: string;
-  users: IUser[];
   tasks: ITask[];
+  user: IUser;
 }
