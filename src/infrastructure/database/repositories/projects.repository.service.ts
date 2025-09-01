@@ -16,8 +16,11 @@ export class ProjectsRepositoryService
   findAll(userId: number): Promise<IProject[]> {
     return this.findBy({ user: { id: userId } });
   }
-  findById(id: number): Promise<IProject> {
-    return this.findOneByOrFail({ id });
+  findById(userId: number, id: number): Promise<IProject> {
+    return this.findOneOrFail({
+      relations: { tasks: true },
+      where: { id, user: { id: userId } },
+    });
   }
   add(payload: DeepPartial<IProject>): Promise<IProject> {
     return this.save(payload);
