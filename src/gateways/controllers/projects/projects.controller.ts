@@ -2,17 +2,18 @@ import {
   Body,
   Controller,
   Get,
+  Inject,
   NotFoundException,
   Param,
   Post,
+  Req,
   UnprocessableEntityException,
 } from '@nestjs/common';
 import { CreateProjectService } from 'src/domain/use-cases/projects/create-project.service';
 import { GetAllProjectsService } from 'src/domain/use-cases/projects/get-all-projects.service';
 import { GetProjectByIdService } from 'src/domain/use-cases/projects/get-project-by-id.service';
 import { CreateProjectDto } from './dtos/create-project.dto';
-
-const userId = 1;
+import { CACHE_MANAGER, Cache } from '@nestjs/cache-manager';
 
 @Controller('projects')
 export class ProjectsController {
@@ -20,31 +21,49 @@ export class ProjectsController {
     private readonly createProjectUseCase: CreateProjectService,
     private readonly getAllProjectsUseCase: GetAllProjectsService,
     private readonly getProjectByIdUseCase: GetProjectByIdService,
+    @Inject(CACHE_MANAGER) private readonly cacheService: Cache,
   ) {}
 
   @Get()
-  findAll() {
+  async findAll(@Req() request) {
     try {
-      return this.getAllProjectsUseCase.execute(userId);
+      const loggedUser = request.user;
+      const cachedData = await this.cacheService.get(
+        `user-${loggedUser.sub}/projects/all`,
+      );
+
+      if (cachedData) {
+        console.log('Retornando dos do cache...');
+        return cachedData;
+      }
+
+      const data = await this.getAllProjectsUseCase.execute(loggedUser.sub);
+      this.cacheService.set(`user-${loggedUser.sub}/projects/all`, data);
+      return data;
     } catch (error) {
       throw new NotFoundException(error.message);
     }
   }
 
   @Get(':id')
-  findOne(@Param('id') id: number) {
+  findOne(@Req() request, @Param('id') id: number) {
     try {
-      return this.getProjectByIdUseCase.execute({ userId, projectId: id });
+      const loggedUser = request.user;
+      return this.getProjectByIdUseCase.execute({
+        userId: loggedUser.sub,
+        projectId: id,
+      });
     } catch (error) {
       throw new NotFoundException(error.message);
     }
   }
 
   @Post()
-  create(@Body() createProjectDto: CreateProjectDto) {
+  create(@Req() request, @Body() createProjectDto: CreateProjectDto) {
     try {
+      const loggedUser = request.user;
       return this.createProjectUseCase.execute({
-        userId,
+        userId: loggedUser.sub,
         project: createProjectDto,
       });
     } catch (error) {

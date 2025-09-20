@@ -5,14 +5,13 @@ import {
   NotFoundException,
   Param,
   Post,
+  Req,
 } from '@nestjs/common';
 import { CreateTaskService } from 'src/domain/use-cases/tasks/create-task.service';
 import { GetAllTasksService } from 'src/domain/use-cases/tasks/get-all-tasks.service';
 import { GetTaskByIdService } from 'src/domain/use-cases/tasks/get-task-by-id.service';
 import { UpdateTaskService } from 'src/domain/use-cases/tasks/update-task.service';
 import { CreateTaskDto } from './dtos/create-task.dto';
-
-const userId = 1;
 
 @Controller('tasks')
 export class TasksController {
@@ -24,27 +23,36 @@ export class TasksController {
   ) {}
 
   @Get()
-  findAll() {
+  findAll(@Req() request) {
     try {
-      return this.getAllTasksUseCase.execute(userId);
+      const loggedUser = request.user;
+      return this.getAllTasksUseCase.execute(loggedUser.sub);
     } catch (error) {
       throw new NotFoundException(error.message);
     }
   }
 
   @Get(':id')
-  findOne(@Param('id') id: number) {
+  findOne(@Req() request, @Param('id') id: number) {
     try {
-      return this.getTaskByIdUseCase.execute({ userId, taskId: id });
+      const loggedUser = request.user;
+      return this.getTaskByIdUseCase.execute({
+        userId: loggedUser.sub,
+        taskId: id,
+      });
     } catch (error) {
       throw new NotFoundException(error.message);
     }
   }
 
   @Post()
-  create(@Body() createTaskDto: CreateTaskDto) {
+  create(@Req() request, @Body() createTaskDto: CreateTaskDto) {
     try {
-      return this.createTaskUseCase.execute({ task: createTaskDto, userId });
+      const loggedUser = request.user;
+      return this.createTaskUseCase.execute({
+        task: createTaskDto,
+        userId: loggedUser.sub,
+      });
     } catch (error) {
       throw new NotFoundException(error.message);
     }
