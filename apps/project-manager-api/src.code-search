@@ -1,0 +1,193 @@
+# Query: src
+# Including: ./apps/project-manager-api
+# ContextLines: 1
+
+70 results - 30 files
+
+apps/project-manager-api/tsconfig.app.json:
+  6    },
+  7:   "include": ["@project-manager-api/**/*"],
+  8    "exclude": ["node_modules", "dist", "test", "**/*spec.ts"]
+
+apps/project-manager-api/@project-manager-api/domain/use-cases/base-use-case.ts:
+  1: import { UsersRepositoryService } from '@project-manager-api/infrastructure/database/repositories/users.repository.service';
+  2  import { IUser } from '../interfaces/user.interface';
+
+apps/project-manager-api/@project-manager-api/domain/use-cases/projects/create-project.service.ts:
+  2  import { BaseUseCaseImpl } from '../base-use-case';
+  3: import { ProjectsRepositoryService } from '@project-manager-api/infrastructure/database/repositories/projects.repository.service';
+  4: import { IProject } from '@project-manager-api/domain/interfaces/project.interface';
+  5: import { CreateProjectDto } from '@project-manager-api/gateways/controllers/projects/dtos/create-project.dto';
+  6: import { UsersRepositoryService } from '@project-manager-api/infrastructure/database/repositories/users.repository.service';
+  7  
+
+apps/project-manager-api/@project-manager-api/domain/use-cases/projects/get-all-projects.service.ts:
+  2  import { BaseUseCaseImpl } from '../base-use-case';
+  3: import { UsersRepositoryService } from '@project-manager-api/infrastructure/database/repositories/users.repository.service';
+  4: import { ProjectsRepositoryService } from '@project-manager-api/infrastructure/database/repositories/projects.repository.service';
+  5: import { IProject } from '@project-manager-api/domain/interfaces/project.interface';
+  6  
+
+apps/project-manager-api/@project-manager-api/domain/use-cases/projects/get-project-by-id.service.ts:
+  1  import { Injectable } from '@nestjs/common';
+  2: import { ProjectsRepositoryService } from '@project-manager-api/infrastructure/database/repositories/projects.repository.service';
+  3: import { UsersRepositoryService } from '@project-manager-api/infrastructure/database/repositories/users.repository.service';
+  4  import { BaseUseCaseImpl } from '../base-use-case';
+  5: import { IProject } from '@project-manager-api/domain/interfaces/project.interface';
+  6  
+
+apps/project-manager-api/@project-manager-api/domain/use-cases/projects/projects.module.ts:
+  4  import { CreateProjectService } from './create-project.service';
+  5: import { DatabaseModule } from '@project-manager-api/infrastructure/database/database.module';
+  6  
+
+apps/project-manager-api/@project-manager-api/domain/use-cases/tasks/create-task.service.ts:
+  2  import { BaseUseCaseImpl } from '../base-use-case';
+  3: import { UsersRepositoryService } from '@project-manager-api/infrastructure/database/repositories/users.repository.service';
+  4: import { ProjectsRepositoryService } from '@project-manager-api/infrastructure/database/repositories/projects.repository.service';
+  5: import { TasksRepositoryService } from '@project-manager-api/infrastructure/database/repositories/tasks.repository.service';
+  6: import { CreateTaskDto } from '@project-manager-api/gateways/controllers/tasks/dtos/create-task.dto';
+  7: import { ITask } from '@project-manager-api/domain/interfaces/task.interface';
+  8  
+
+apps/project-manager-api/@project-manager-api/domain/use-cases/tasks/get-all-tasks.service.ts:
+  2  import { BaseUseCaseImpl } from '../base-use-case';
+  3: import { ITask } from '@project-manager-api/domain/interfaces/task.interface';
+  4: import { TasksRepositoryService } from '@project-manager-api/infrastructure/database/repositories/tasks.repository.service';
+  5: import { UsersRepositoryService } from '@project-manager-api/infrastructure/database/repositories/users.repository.service';
+  6  
+
+apps/project-manager-api/@project-manager-api/domain/use-cases/tasks/get-task-by-id.service.ts:
+  2  import { BaseUseCaseImpl } from '../base-use-case';
+  3: import { ITask } from '@project-manager-api/domain/interfaces/task.interface';
+  4: import { TasksRepositoryService } from '@project-manager-api/infrastructure/database/repositories/tasks.repository.service';
+  5: import { UsersRepositoryService } from '@project-manager-api/infrastructure/database/repositories/users.repository.service';
+  6  
+
+apps/project-manager-api/@project-manager-api/domain/use-cases/tasks/tasks.module.ts:
+  5  import { UpdateTaskService } from './update-task.service';
+  6: import { DatabaseModule } from '@project-manager-api/infrastructure/database/database.module';
+  7  
+
+apps/project-manager-api/@project-manager-api/domain/use-cases/tasks/update-task.service.ts:
+  2  import { BaseUseCaseImpl } from '../base-use-case';
+  3: import { TasksRepositoryService } from '@project-manager-api/infrastructure/database/repositories/tasks.repository.service';
+  4: import { UsersRepositoryService } from '@project-manager-api/infrastructure/database/repositories/users.repository.service';
+  5: import { ITask } from '@project-manager-api/domain/interfaces/task.interface';
+  6: import { UpdateTaskDto } from '@project-manager-api/gateways/controllers/tasks/dtos/update-task.dto';
+  7  
+
+apps/project-manager-api/@project-manager-api/domain/use-cases/users/create-user.service.ts:
+  2  import { BaseUseCase } from '../base-use-case';
+  3: import { CreateUserDto } from '@project-manager-api/gateways/controllers/users/dtos/create-user.dto';
+  4: import { UsersRepositoryService } from '@project-manager-api/infrastructure/database/repositories/users.repository.service';
+  5: import { IUser } from '@project-manager-api/domain/interfaces/user.interface';
+  6  import { hash } from 'bcrypt';
+
+apps/project-manager-api/@project-manager-api/domain/use-cases/users/get-user-by-email.service.ts:
+  2  import { BaseUseCase } from '../base-use-case';
+  3: import { UsersRepositoryService } from '@project-manager-api/infrastructure/database/repositories/users.repository.service';
+  4: import { IUser } from '@project-manager-api/domain/interfaces/user.interface';
+  5  
+
+apps/project-manager-api/@project-manager-api/domain/use-cases/users/get-user-by-id.service.ts:
+  2  import { BaseUseCase } from '../base-use-case';
+  3: import { IUser } from '@project-manager-api/domain/interfaces/user.interface';
+  4: import { UsersRepositoryService } from '@project-manager-api/infrastructure/database/repositories/users.repository.service';
+  5  
+
+apps/project-manager-api/@project-manager-api/domain/use-cases/users/users.module.ts:
+  4  import { GetUserByEmailService } from './get-user-by-email.service';
+  5: import { DatabaseModule } from '@project-manager-api/infrastructure/database/database.module';
+  6  
+
+apps/project-manager-api/@project-manager-api/gateways/controllers/controllers.module.ts:
+  4  import { UsersController } from './users/users.controller';
+  5: import { UseCasesModule } from '@project-manager-api/domain/use-cases/use-cases.module';
+  6  import { AuthController } from './auth/auth.controller';
+  7: import { AuthModule } from '@project-manager-api/infrastructure/auth/auth.module';
+  8  
+
+apps/project-manager-api/@project-manager-api/gateways/controllers/auth/auth.controller.ts:
+  1  import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+  2: import { Public } from '@project-manager-api/gateways/guards/auth-guard.service';
+  3: import { AuthService } from '@project-manager-api/infrastructure/auth/auth.service';
+  4  import { LoginDto } from './dtos/login.dto';
+
+apps/project-manager-api/@project-manager-api/gateways/controllers/projects/projects.controller.ts:
+  11  } from '@nestjs/common';
+  12: import { CreateProjectService } from '@project-manager-api/domain/use-cases/projects/create-project.service';
+  13: import { GetAllProjectsService } from '@project-manager-api/domain/use-cases/projects/get-all-projects.service';
+  14: import { GetProjectByIdService } from '@project-manager-api/domain/use-cases/projects/get-project-by-id.service';
+  15  import { CreateProjectDto } from './dtos/create-project.dto';
+
+apps/project-manager-api/@project-manager-api/gateways/controllers/tasks/tasks.controller.ts:
+   9  } from '@nestjs/common';
+  10: import { CreateTaskService } from '@project-manager-api/domain/use-cases/tasks/create-task.service';
+  11: import { GetAllTasksService } from '@project-manager-api/domain/use-cases/tasks/get-all-tasks.service';
+  12: import { GetTaskByIdService } from '@project-manager-api/domain/use-cases/tasks/get-task-by-id.service';
+  13: import { UpdateTaskService } from '@project-manager-api/domain/use-cases/tasks/update-task.service';
+  14  import { CreateTaskDto } from './dtos/create-task.dto';
+
+apps/project-manager-api/@project-manager-api/gateways/controllers/users/users.controller.ts:
+   7  import { CreateUserDto } from './dtos/create-user.dto';
+   8: import { CreateUserService } from '@project-manager-api/domain/use-cases/users/create-user.service';
+   9: import { GetUserByIdService } from '@project-manager-api/domain/use-cases/users/get-user-by-id.service';
+  10: import { Public } from '@project-manager-api/gateways/guards/auth-guard.service';
+  11  
+
+apps/project-manager-api/@project-manager-api/gateways/guards/auth-guard.service.ts:
+  10  import { Request } from 'express';
+  11: import { jwtConstants } from '@project-manager-api/infrastructure/auth/constants';
+  12  
+
+apps/project-manager-api/@project-manager-api/infrastructure/auth/auth.module.ts:
+  2  import { AuthService } from './auth.service';
+  3: import { UsersModule } from '@project-manager-api/domain/use-cases/users/users.module';
+  4  import { JwtModule } from '@nestjs/jwt';
+
+apps/project-manager-api/@project-manager-api/infrastructure/auth/auth.service.ts:
+  3  import { compare } from 'bcrypt';
+  4: import { GetUserByEmailService } from '@project-manager-api/domain/use-cases/users/get-user-by-email.service';
+  5  
+
+apps/project-manager-api/@project-manager-api/infrastructure/database/entities/project.entity.ts:
+  1: import { IProject } from '@project-manager-api/domain/interfaces/project.interface';
+  2: import { ITask } from '@project-manager-api/domain/interfaces/task.interface';
+  3: import type { IUser } from '@project-manager-api/domain/interfaces/user.interface';
+  4  import {
+
+apps/project-manager-api/@project-manager-api/infrastructure/database/entities/task.entity.ts:
+  1: import { ITask } from '@project-manager-api/domain/interfaces/task.interface';
+  2: import type { IUser } from '@project-manager-api/domain/interfaces/user.interface';
+  3: import type { IProject } from '@project-manager-api/domain/interfaces/project.interface';
+  4  import {
+
+apps/project-manager-api/@project-manager-api/infrastructure/database/entities/user.entity.ts:
+  1: import { IProject } from '@project-manager-api/domain/interfaces/project.interface';
+  2: import { ITask } from '@project-manager-api/domain/interfaces/task.interface';
+  3: import { IUser } from '@project-manager-api/domain/interfaces/user.interface';
+  4  import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+
+apps/project-manager-api/@project-manager-api/infrastructure/database/repositories/projects.repository.service.ts:
+  1  import { Injectable } from '@nestjs/common';
+  2: import { IProject } from '@project-manager-api/domain/interfaces/project.interface';
+  3: import { IProjectsRepository } from '@project-manager-api/domain/repositories/projects-repository.interface';
+  4  import { DataSource, DeepPartial, Repository } from 'typeorm';
+
+apps/project-manager-api/@project-manager-api/infrastructure/database/repositories/tasks.repository.service.ts:
+  3  import { TaskEntity } from '../entities/task.entity';
+  4: import { ITaskRepository } from '@project-manager-api/domain/repositories/tasks-repository.interface';
+  5: import { ITask } from '@project-manager-api/domain/interfaces/task.interface';
+  6  
+
+apps/project-manager-api/@project-manager-api/infrastructure/database/repositories/users.repository.service.ts:
+  3  import { UserEntity } from '../entities/user.entity';
+  4: import { IUsersRepository } from '@project-manager-api/domain/repositories/users-repository.interface';
+  5: import { IUser } from '@project-manager-api/domain/interfaces/user.interface';
+  6  
+
+apps/project-manager-api/test/app.e2e-spec.ts:
+  4  import { App } from 'supertest/types';
+  5: import { AppModule } from './../@project-manager-api/app.module';
+  6  
